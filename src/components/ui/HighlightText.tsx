@@ -1,36 +1,38 @@
 /**
- * @file HighlightText.tsx
- * @purpose Renders text where a queried substring is visually highlighted.
- * Matching is case-insensitive and ignores whitespace, ensuring that
- * `"Map Tools"` correctly highlights against `"maptools"`.
- */
+*@file HighlightText.tsx
+*@description Renders text where a queried substring is visually highlighted.
+*Matching is case-insensitive and ignores whitespace, ensuring that
+*"Map Tools" correctly highlights against "maptools".
+*/
 
-import React from 'react';
-import { Text, useColorScheme } from 'react-native';
+import React from "react";
+import { Text } from "react-native";
 
 interface HighlightTextProps {
   /** Full source text that may contain the query */
   text: string;
-  /** Search query to highlight if matched */
+  /* Search query to highlight if matched */
   query: string;
 }
 
 /**
- * Highlights a matched query within text. If the query is found, only the
- * matching segment is styled with a highlight background. If not found,
- * original text is rendered unchanged.
- *
- * @param props Display text and query value.
- * @returns Formatted text with optional highlight.
- */
-export function HighlightText({ text, query }: HighlightTextProps) {
-  const isDark = useColorScheme() === 'dark';
 
+Highlights a matched query within text. If the query is found, only the
+
+matching segment is styled with a highlight background. If not found,
+
+original text is rendered unchanged.
+
+@param props Display text and query value.
+
+@returns Formatted text with optional highlight.
+*/
+export function HighlightText({ text, query }: HighlightTextProps) {
   /** Renders plain text when no search query is provided */
   if (!query) return <Text>{text}</Text>;
 
-  const normText = text.toLowerCase().replace(/\s+/g, '');
-  const normQuery = query.toLowerCase().replace(/\s+/g, '');
+  const normText = text.toLowerCase().replace(/\s+/g, "");
+  const normQuery = query.toLowerCase().replace(/\s+/g, "");
 
   /** If no normalized match occurs, return original text */
   if (!normText.includes(normQuery)) {
@@ -73,15 +75,7 @@ export function HighlightText({ text, query }: HighlightTextProps) {
       <Text>{before}</Text>
 
       {/* Highlighted match */}
-      <Text
-        style={{
-          backgroundColor: isDark ? '#FACC1544' : '#FFF59E',
-          borderRadius: 4,
-          paddingHorizontal: 2,
-          overflow: 'hidden',
-        }}>
-        {highlight}
-      </Text>
+      <Text className="overflow-hidden rounded-sm bg-text-highlight px-1">{highlight}</Text>
 
       <Text>{after}</Text>
     </Text>

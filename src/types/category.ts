@@ -1,6 +1,6 @@
 /**
  * @file category.ts
- * @purpose Defines the Category type, representing a group of tools with a label,
+ * @description Defines the Category type, representing a group of tools with a label,
  * themed color, icon reference, and a list of tools belonging to that group.
  */
 

@@ -1,6 +1,6 @@
 /**
  * @file color-theme.ts
- * @purpose Defines application theme variables for light and dark modes.
+ * @description Defines application theme variables for light and dark modes.
  * These tokens provide unified color values for surfaces, text, icons,
  * borders, overlays, category colors, and fallback visual elements.
  */
@@ -26,6 +26,7 @@ export const themes = {
     '--color-text-secondary': '#4B5563', // secondary text
     '--color-text-muted': '#666666', // subtle/placeholder text
     '--color-text-emphasis': '#000000', // strong text
+    '--color-text-highlight': '#FFF59E', //search highlight
 
     /* Icon */
     '--color-icon-primary': '#000000', // main icons
@@ -45,7 +46,7 @@ export const themes = {
     '--color-category-image': '#3B82F6',
     '--color-category-audio': '#10B981',
     '--color-category-video': '#A855F7',
-    '--color-category-text': '#FACC15',
+    '--color-category-text': '#eab308',
     '--color-category-file': '#F97316',
 
     /* Fallback badge */
@@ -63,6 +64,7 @@ export const themes = {
     '--color-text-secondary': '#A1A1AA', // secondary text
     '--color-text-muted': '#999999', // subtle/placeholder text
     '--color-text-emphasis': '#FFFFFF', // strong text
+    '--color-text-highlight': '#FACC1544', //search highlight
 
     /* Icon */
     '--color-icon-primary': '#FFFFFF', // main icons
@@ -82,7 +84,7 @@ export const themes = {
     '--color-category-image': '#3B82F6',
     '--color-category-audio': '#10B981',
     '--color-category-video': '#A855F7',
-    '--color-category-text': '#FACC15',
+    '--color-category-text': '#eab308',
     '--color-category-file': '#F97316',
 
     /* Fallback badge */

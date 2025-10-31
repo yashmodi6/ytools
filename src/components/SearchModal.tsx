@@ -7,7 +7,9 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { Text, TextInput, View, TouchableOpacity, FlatList, useColorScheme } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, FlatList } from 'react-native';
+
+import { useTheme } from '@/providers/theme-provider';
 
 import { BottomSheetModal, BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -46,7 +48,8 @@ interface Props {
  * @returns Bottom sheet modal UI
  */
 export default function SearchModal({ visible, onClose, onSelect }: Props) {
-  const isDark = useColorScheme() === 'dark';
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const snapPoints = useMemo(() => ['75%', '92%'], []);
 
@@ -89,19 +92,17 @@ export default function SearchModal({ visible, onClose, onSelect }: Props) {
     ({ item }: { item: Tool & { category?: string; color?: string; icon?: string } }) => (
       <TouchableOpacity
         onPress={() => handleSelect(item)}
-        className={`flex-row items-center border-b py-3 ${
-          isDark ? 'border-zinc-800' : 'border-gray-200'
-        }`}>
+        className="flex-row items-center border-b border-border py-3">
         <View className={`mr-4 rounded-xl p-3 ${item.color}`}>
-          <MaterialIcons name={item.icon} size={22} color="white" />
+          <MaterialIcons name={item.icon} className="text-[22px] text-white" />
         </View>
 
         <View className="flex-shrink">
-          <Text className={`text-base font-medium ${isDark ? 'text-white' : 'text-zinc-900'}`}>
+          <Text className="text-base font-medium text-text-primary">
             <HighlightText text={item.name} query={query} />
           </Text>
 
-          <Text className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <Text className="text-xs text-text-secondary">
             <HighlightText text={item.category ?? ''} query={query} />
           </Text>
         </View>
@@ -142,22 +143,19 @@ export default function SearchModal({ visible, onClose, onSelect }: Props) {
       }}>
       <BottomSheetView className="min-h-full flex-1 px-4 pt-4">
         {/* 🔎 SEARCH BAR */}
-        <View
-          className={`mb-4 flex-row items-center rounded-2xl px-4 py-3 ${
-            isDark ? 'bg-zinc-800' : 'bg-gray-100'
-          }`}>
-          <Ionicons name="search-outline" size={22} color={isDark ? 'white' : 'black'} />
+        <View className="mb-4 flex-row items-center rounded-2xl bg-surface-secondary px-4 py-3">
+          <Ionicons name="search-outline" className="text-[22px] text-icon-primary" />
 
           <TextInput
             placeholder="Search tools..."
             placeholderTextColor={isDark ? '#999' : '#666'}
             value={query}
             onChangeText={setQuery}
-            className={`ml-3 flex-1 text-base ${isDark ? 'text-white' : 'text-black'}`}
+            className="ml-3 flex-1 text-base text-text-emphasis"
           />
 
           <TouchableOpacity onPress={onClose}>
-            <Ionicons name="close" size={22} color={isDark ? 'white' : 'black'} />
+            <Ionicons name="close" className="text-[22px] text-icon-primary" />
           </TouchableOpacity>
         </View>
 
@@ -172,9 +170,7 @@ export default function SearchModal({ visible, onClose, onSelect }: Props) {
           windowSize={8}
           contentContainerStyle={{ paddingBottom: 40 }}
           ListEmptyComponent={() => (
-            <Text className={`py-6 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-              No tools found
-            </Text>
+            <Text className={`py-6 text-center text-text-muted`}>No tools found</Text>
           )}
         />
       </BottomSheetView>

@@ -1,6 +1,6 @@
 /**
  * @file categories.ts
- * @purpose Provides a static list of tool categories and the tools within each category.
+ * @description Provides a static list of tool categories and the tools within each category.
  * Each category defines a display title, color theme, icon, and its associated tools.
  */
 
@@ -20,7 +20,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'PDF Tools',
-    color: 'bg-rose-500',
+    color: 'bg-category-pdf',
     icon: 'document-text-outline',
     tools: [
       { name: 'PDF Merge', icon: 'merge-type' },
@@ -37,7 +37,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'Image Tools',
-    color: 'bg-blue-500',
+    color: 'bg-category-image',
     icon: 'image-outline',
     tools: [
       { name: 'IMG Resize', icon: 'aspect-ratio' },
@@ -54,7 +54,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'Audio Tools',
-    color: 'bg-emerald-500',
+    color: 'bg-category-audio',
     icon: 'musical-notes-outline',
     tools: [
       { name: 'Audio Trim', icon: 'content-cut' },
@@ -68,7 +68,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'Video Tools',
-    color: 'bg-purple-500',
+    color: 'bg-category-video',
     icon: 'videocam-outline',
     tools: [
       { name: 'Video Trim', icon: 'content-cut' },
@@ -83,7 +83,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'Text Tools',
-    color: 'bg-yellow-500',
+    color: 'bg-category-text',
     icon: 'text-outline',
     tools: [
       { name: 'Uppercase', icon: 'text-fields' },
@@ -99,7 +99,7 @@ export const categoriesStatic: Category[] = [
   // -----------------------------------
   {
     title: 'File Tools',
-    color: 'bg-orange-500',
+    color: 'bg-category-file',
     icon: 'folder-outline',
     tools: [
       { name: 'ZIP Create', icon: 'folder-zip' },

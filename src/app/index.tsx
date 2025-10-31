@@ -1,12 +1,12 @@
 /**
  * @file HomeScreen.tsx
- * @purpose Renders the app's main screen that displays tool categories,
+ * @description Renders the app's main screen that displays tool categories,
  * provides search access, and allows navigation to individual tool screens.
  */
 
-import React, { useCallback } from 'react';
-import { SafeAreaView, useColorScheme, FlatList, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
+import { SafeAreaView, FlatList, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import Header from '../components/Header';
 import SearchModal from '../components/SearchModal';
@@ -23,10 +23,9 @@ import type { Category } from '../types/category';
  * @returns The main home screen UI.
  */
 export default function HomeScreen() {
-  const navigation = useNavigation();
-  const isDark = useColorScheme() === 'dark';
+  const router = useRouter();
 
-  const [searchVisible, setSearchVisible] = React.useState(false);
+  const [searchVisible, setSearchVisible] = useState(false);
 
   /**
    * Navigates to the screen for a selected tool.
@@ -35,9 +34,12 @@ export default function HomeScreen() {
    */
   const handleOpenTool = useCallback(
     (tool: Tool & { category?: string; color?: string }) => {
-      navigation.navigate('ToolScreen' as never, { tool } as never);
+      router.push({
+        pathname: '/tool',
+        params: { tool: JSON.stringify(tool) },
+      });
     },
-    [navigation]
+    [router]
   );
 
   /**
@@ -51,7 +53,7 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-zinc-900' : 'bg-white'}`}>
+    <SafeAreaView className="flex-1 bg-surface">
       <Header title="YTools" onSearch={() => setSearchVisible(true)} />
 
       {/* Adds space between header and category list */}

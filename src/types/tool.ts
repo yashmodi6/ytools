@@ -1,6 +1,6 @@
 /**
  * @file tool.ts
- * @purpose Defines the Tool type, which represents an individual actionable utility
+ * @description Defines the Tool type, which represents an individual actionable utility
  * in the application, including its display label and icon reference.
  */
 

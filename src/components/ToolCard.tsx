@@ -7,7 +7,7 @@
  */
 
 import React, { useRef } from 'react';
-import { TouchableOpacity, View, Text, useColorScheme } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import type { Tool } from '../types/tool';
@@ -44,7 +44,6 @@ const CARD_WIDTH = 112;
  * - Height awareness so parent layouts stay consistent
  */
 const ToolCard = React.memo(({ tool, onPress, maxHeight, onMeasuredHeight }: ToolCardProps) => {
-  const isDark = useColorScheme() === 'dark';
   const localRef = useRef<View>(null);
 
   return (
@@ -58,9 +57,7 @@ const ToolCard = React.memo(({ tool, onPress, maxHeight, onMeasuredHeight }: Too
         onLayout={(e) => {
           onMeasuredHeight(e.nativeEvent.layout.height);
         }}
-        className={`items-center justify-start rounded-2xl p-4 shadow ${
-          isDark ? 'bg-zinc-800 shadow-black/40' : 'bg-gray-100 shadow-gray-400/20'
-        }`}
+        className="shadow-shadow-default items-center justify-start rounded-2xl bg-surface-secondary p-4 shadow"
         style={{
           height: maxHeight || undefined,
           shadowRadius: 6,
@@ -68,16 +65,15 @@ const ToolCard = React.memo(({ tool, onPress, maxHeight, onMeasuredHeight }: Too
         }}>
         {/* Icon */}
         <View
-          className={`${tool.color ?? 'bg-gray-400'} items-center justify-center rounded-full`}
+          className={`${tool.color ?? 'bg-tool-fallback'} items-center justify-center rounded-full`}
           style={{ width: 48, height: 48 }}>
-          <MaterialIcons name={tool.icon} size={26} color="white" />
+          <MaterialIcons name={tool.icon} className="text-[26px] text-white" />
         </View>
 
         {/* Tool name */}
         <Text
-          className={`mt-3 text-center text-sm font-medium ${
-            isDark ? 'text-white' : 'text-zinc-800'
-          }`}
+          className="mt-3 text-center text-sm font-medium text-text-primary
+          "
           numberOfLines={3}>
           {tool.name}
         </Text>

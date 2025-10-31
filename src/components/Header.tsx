@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -35,12 +35,10 @@ interface HeaderProps {
  * @returns A header UI section
  */
 export default function Header({ title, onSearch, onSettings }: HeaderProps) {
-  const isDark = useColorScheme() === 'dark';
-
   return (
     <SafeAreaView
       edges={['top']}
-      className={isDark ? 'bg-zinc-900' : 'bg-white'}
+      className="bg-surface"
       style={{
         minHeight: 64,
         shadowColor: '#000',
@@ -50,22 +48,20 @@ export default function Header({ title, onSearch, onSettings }: HeaderProps) {
         elevation: 4,
       }}>
       <View className="h-14 flex-row items-center justify-between px-4">
-        <Text
-          className={`px-1 text-[22px] font-semibold ${isDark ? 'text-white' : 'text-zinc-900'}`}
-          numberOfLines={1}>
+        <Text className="px-1 text-[22px] font-semibold text-text-primary" numberOfLines={1}>
           {title}
         </Text>
 
         <View className="flex-row items-center">
           {onSearch && (
             <TouchableOpacity onPress={onSearch} hitSlop={10} className="p-1.5">
-              <Ionicons name="search-outline" size={24} color={isDark ? 'white' : 'black'} />
+              <Ionicons name="search-outline" className="text-[24px] text-icon-primary" />
             </TouchableOpacity>
           )}
 
           {/* ✅ Always show settings */}
           <TouchableOpacity onPress={onSettings} hitSlop={10} className="ml-2 p-1.5">
-            <Ionicons name="settings-outline" size={24} color={isDark ? 'white' : 'black'} />
+            <Ionicons name="settings-outline" className="text-[24px] text-icon-primary" />
           </TouchableOpacity>
         </View>
       </View>

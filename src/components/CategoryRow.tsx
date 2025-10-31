@@ -1,12 +1,12 @@
 /**
  * @file CategoryRow.tsx
- * @purpose Displays a category section containing its title, icon,
+ * @description Displays a category section containing its title, icon,
  * and a horizontally scrolling list of tools. Each tool can be selected
  * to trigger navigation or additional actions.
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, FlatList, useColorScheme } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 
 import ToolCard from './ToolCard';
@@ -37,8 +37,6 @@ type CategoryRowProps = {
  * @returns A category section UI block
  */
 export default function CategoryRow({ category, onToolPress }: CategoryRowProps) {
-  const isDark = useColorScheme() === 'dark';
-
   /** Maintains tallest ToolCard height for layout consistency */
   const [maxHeight, setMaxHeight] = useState<number>(0);
 
@@ -56,14 +54,12 @@ export default function CategoryRow({ category, onToolPress }: CategoryRowProps)
       {/* Category heading */}
       <View className="mb-3 flex-row items-center justify-between px-5">
         <View className="flex-row items-center">
-          <Ionicons name={category.icon} size={22} color={isDark ? 'white' : 'black'} />
+          <Ionicons name={category.icon} className="text-[22px] text-icon-primary" />
 
-          <Text className={`ml-2 text-lg font-semibold ${isDark ? 'text-white' : 'text-zinc-900'}`}>
-            {category.title}
-          </Text>
+          <Text className="ml-2 text-lg font-semibold text-text-primary ">{category.title}</Text>
         </View>
 
-        <Feather name="chevron-right" size={22} color="gray" />
+        <Feather name="chevron-right" className="text-[22px] text-icon-secondary" />
       </View>
 
       <FlatList
