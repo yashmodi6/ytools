@@ -54,7 +54,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <Header title="YTools" onSearch={() => setSearchVisible(true)} />
+      <Header title="YTools" onSearch={() => setSearchVisible(true)} showSearch showSettings />
 
       {/* Adds space between header and category list */}
       <View className="mt-5" />

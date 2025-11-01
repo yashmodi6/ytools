@@ -1,12 +1,12 @@
 /**
-*@file HighlightText.tsx
-*@description Renders text where a queried substring is visually highlighted.
-*Matching is case-insensitive and ignores whitespace, ensuring that
-*"Map Tools" correctly highlights against "maptools".
-*/
+ *@file HighlightText.tsx
+ *@description Renders text where a queried substring is visually highlighted.
+ *Matching is case-insensitive and ignores whitespace, ensuring that
+ *"Map Tools" correctly highlights against "maptools".
+ */
 
-import React from "react";
-import { Text } from "react-native";
+import React from 'react';
+import { Text } from 'react-native';
 
 interface HighlightTextProps {
   /** Full source text that may contain the query */
@@ -31,8 +31,8 @@ export function HighlightText({ text, query }: HighlightTextProps) {
   /** Renders plain text when no search query is provided */
   if (!query) return <Text>{text}</Text>;
 
-  const normText = text.toLowerCase().replace(/\s+/g, "");
-  const normQuery = query.toLowerCase().replace(/\s+/g, "");
+  const normText = text.toLowerCase().replace(/\s+/g, '');
+  const normQuery = query.toLowerCase().replace(/\s+/g, '');
 
   /** If no normalized match occurs, return original text */
   if (!normText.includes(normQuery)) {

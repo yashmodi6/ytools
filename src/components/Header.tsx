@@ -1,15 +1,16 @@
 /**
  * @file Header.tsx
  * @description
- * Displays the top application header containing a title and optional
- * action icons. The settings icon is always visible, while the search
- * icon renders only if a handler is provided.
+ * Displays the top header containing a title and optional action icons.
+ * Back icon automatically routes to previous screen.
+ * Settings icon automatically routes to settings page.
  */
 
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 /**
  * Props for the `Header` component.
@@ -21,20 +22,32 @@ interface HeaderProps {
   /** Optional callback triggered when search icon is pressed */
   onSearch?: () => void;
 
-  /** Callback triggered when settings icon is pressed (always visible) */
-  onSettings?: () => void;
+  /** Toggle: show back icon */
+  showBack?: boolean;
+
+  /** Toggle: show search icon */
+  showSearch?: boolean;
+
+  /** Toggle: show settings icon */
+  showSettings?: boolean;
 }
 
 /**
  * Renders a top application header featuring:
+ * - Optional back button → auto navigates
  * - Title text
- * - Always-visible settings button
- * - Optional searchable action
+ * - Optional search & settings action
  *
  * @param props Component configuration
  * @returns A header UI section
  */
-export default function Header({ title, onSearch, onSettings }: HeaderProps) {
+export default function Header({
+  title,
+  onSearch,
+  showBack = false,
+  showSearch = false,
+  showSettings = false,
+}: HeaderProps) {
   return (
     <SafeAreaView
       edges={['top']}
@@ -48,21 +61,35 @@ export default function Header({ title, onSearch, onSettings }: HeaderProps) {
         elevation: 4,
       }}>
       <View className="h-14 flex-row items-center justify-between px-4">
-        <Text className="px-1 text-[22px] font-semibold text-text-primary" numberOfLines={1}>
-          {title}
-        </Text>
-
+        {/* Left side area */}
         <View className="flex-row items-center">
-          {onSearch && (
+          {showBack && (
+            <TouchableOpacity onPress={() => router.back()} hitSlop={10} className="p-1.5">
+              <Ionicons name="chevron-back" className="text-[24px] text-icon-primary" />
+            </TouchableOpacity>
+          )}
+
+          <Text className="px-1 text-[22px] font-semibold text-text-primary" numberOfLines={1}>
+            {title}
+          </Text>
+        </View>
+
+        {/* Right side area */}
+        <View className="flex-row items-center">
+          {showSearch && (
             <TouchableOpacity onPress={onSearch} hitSlop={10} className="p-1.5">
               <Ionicons name="search-outline" className="text-[24px] text-icon-primary" />
             </TouchableOpacity>
           )}
 
-          {/* ✅ Always show settings */}
-          <TouchableOpacity onPress={onSettings} hitSlop={10} className="ml-2 p-1.5">
-            <Ionicons name="settings-outline" className="text-[24px] text-icon-primary" />
-          </TouchableOpacity>
+          {showSettings && (
+            <TouchableOpacity
+              onPress={() => router.push('/settings')}
+              hitSlop={10}
+              className="ml-2 p-1.5">
+              <Ionicons name="settings-outline" className="text-[24px] text-icon-primary" />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </SafeAreaView>
